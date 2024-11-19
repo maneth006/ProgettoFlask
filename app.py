@@ -12,3 +12,11 @@ def home():
 #avvio dell'app Flask
 if __name__ == '__main__':
     app.run(debug=True)
+
+lista_Spesa = []
+@app.route('/aggiungi', methods=['POST'])
+def aggiungi():
+    elemento = request.form['elemento']
+    if elemento:
+        lista_spesa.append(elemento)
+    return redirect(url_for('home'))
