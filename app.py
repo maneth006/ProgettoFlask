@@ -12,23 +12,34 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-lista_Spesa = []
+
 #rotta principale
 @app.route('/')
 def home():
-    return render_template('index.html', lista_Spesa = lista_Spesa)
+    lista_spesa = ListaSpesa.query.all() #COMMENTA
+    return render_template('index.html', lista = lista_spesa)
     #visualizza
 
 @app.route('/aggiungi', methods=['POST'])#usando il metodo post aggiungiamo un elemento alla lista
 def aggiungi():
     elemento = request.form['elemento']
     if elemento:
-        lista_Spesa.append(elemento)
+        nuovo_elemento = ListaSpesa(elemento=elemento) #COMMENTA
+        db.session.add(nuovo_elemento) #COMMENTA
+        db.session.commit() #COMMENTA
     return redirect(url_for('home'))
+
 @app.route('/rimuovi/<int:indice>', methods=['POST'])#usando il metodo post rimuoviamo un elemento dalla lista
 def rimuovi(indice):
-    if 0 <= indice < len(lista_Spesa):
-        lista_Spesa.pop(indice)
+    elemento = ListaSpesa.query.get_or_404(indice) #COMMENTA
+    db.session.delete(elemento) #COMMENTA
+    db.session.commit() #COMMENTA
+    return redirect(url_for('home'))
+
+@app.route('/svuota', methods=['POST'])
+def svuota():
+    ListaSpesa.query.delete() #COMMENTA ???
+    db.session.commit() #COMMENTA ???
     return redirect(url_for('home'))
 
 #avvio dell'app Flask

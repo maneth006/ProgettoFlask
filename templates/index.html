@@ -6,12 +6,12 @@
     </head>
     <body>
         <h1>La tua lista_Spesa della Spesa</h1>
-        {% if lista_Spesa %}
+        {% if lista %}
             <ul>
-            {% for elemento in lista_Spesa %}
+            {% for elemento in lista %}
             <li>
-                {{ elemento }}
-                <form action="/rimuovi/{{ loop.index0 }}" method="post"
+                {{ elemento.elemento }}
+                <form action="/rimuovi/{{ elemento.id }}" method="post"
                     style="display:inline;">
                     <button type="submit">Rimuovi</button>
                 </form>
