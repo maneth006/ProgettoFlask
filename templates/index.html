@@ -5,6 +5,101 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <style>
+            /* Impostazioni generali per il corpo della pagina */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                flex-direction: column;
+            }
+    
+            /* Stile per il titolo */
+            h1 {
+                color: #2c3e50;
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+    
+            /* Stile per la lista della spesa */
+            ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                max-width: 600px;
+            }
+    
+            li {
+                background-color: #ffffff;
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+    
+            /* Pulsante "Rimuovi" */
+            button {
+                background-color: #e74c3c;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+    
+            button:hover {
+                background-color: #c0392b;
+            }
+    
+            /* Form di aggiunta e svuotamento */
+            form {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+    
+            input[type="text"] {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                width: 250px;
+            }
+    
+            input[type="text"]:focus {
+                border-color: #3498db;
+                outline: none;
+            }
+    
+            /* Pulsante "Aggiungi" */
+            button[type="submit"] {
+                background-color: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+    
+            button[type="submit"]:hover {
+                background-color: #27ae60;
+            }
+    
+            /* Stile per il messaggio "La lista è vuota" */
+            p {
+                color: #7f8c8d;
+                font-size: 1.2em;
+            }
+        </style>
         <h1>La tua lista_Spesa della Spesa</h1>
         {% if lista %}
             <ul>
@@ -23,6 +118,9 @@
         {% endif %}
 
     </body>
+    <form action="/svuota" method="post">
+        <button type="submit">Svuota</button>
+    </form>
     <form action="/aggiungi" method="post">
         <input type="text" name="elemento" placeholder="Aggiungi un elemento"
         required>
